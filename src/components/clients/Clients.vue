@@ -1,39 +1,50 @@
 <template>
   <div>
-    <div class="row">
-      <div class="col-md-6">
-        <h2><i class="fas fa-users"></i> Clients</h2>
+    <template v-if="!loading">
+      <div class="row">
+        <div class="col-md-6">
+          <h2><i class="fas fa-users"></i> Clients</h2>
+        </div>
+        <div class="col-md-6"></div>
       </div>
-      <div class="col-md-6"></div>
-    </div>
-    <table class="table table-striped">
-      <thead class="thead-inverse">
-        <tr>
-          <th>Name</th>
-          <th>Email</th>
-          <th>Balance</th>
-          <th />
-        </tr>
-      </thead>
-      <tbody>
-        <tr v-for="client in clients" :key="client.id">
-          <td>{{ client.firstName }} {{ client.lastName }}</td>
-          <td>{{ client.email }}</td>
-          <td>{{ parseFloat(client.balance).toFixed(2) }}</td>
-          <td>
-            <router-link :to="`/client/${client.id}`" class="btn btn-secondary"
-              ><i class="fas fa-arrow-circle-right"></i> Details</router-link
-            >
-          </td>
-        </tr>
-      </tbody>
-    </table>
+      <table class="table table-striped">
+        <thead class="thead-inverse">
+          <tr>
+            <th>Name</th>
+            <th>Email</th>
+            <th>Balance</th>
+            <th />
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for="client in clients" :key="client.id">
+            <td>{{ client.firstName }} {{ client.lastName }}</td>
+            <td>{{ client.email }}</td>
+            <td>{{ parseFloat(client.balance).toFixed(2) }}</td>
+            <td>
+              <router-link
+                :to="`/client/${client.id}`"
+                class="btn btn-secondary"
+                ><i class="fas fa-arrow-circle-right"></i> Details</router-link
+              >
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </template>
+    <template v-else>
+      <Spinner />
+    </template>
   </div>
 </template>
 
 <script>
+import Spinner from "../layout/Spinner";
 import { mapActions, mapState } from "vuex";
 export default {
+  components: {
+    Spinner
+  },
   data() {
     return {};
   },
