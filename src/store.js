@@ -25,7 +25,11 @@ export const store = new Vuex.Store({
       db.collection("clients")
         .get()
         .then(querySnapshot => {
-          const documents = querySnapshot.docs.map(doc => doc.data());
+          const documents = querySnapshot.docs.map(doc => {
+            const data = doc.data();
+            data.id = doc.id;
+            return data;
+          });
           commit("SET_CLIENTS", documents);
           commit("SET_LOADING", false);
           // do something with documents

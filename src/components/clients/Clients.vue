@@ -5,7 +5,14 @@
         <div class="col-md-6">
           <h2><i class="fas fa-users"></i> Clients</h2>
         </div>
-        <div class="col-md-6"></div>
+        <div class="col-md-6">
+          <h5 class="text-right text-secondary">
+            Total owed
+            <span class="text-primary">{{
+              parseFloat(totalOwed).toFixed(2)
+            }}</span>
+          </h5>
+        </div>
       </div>
       <table class="table table-striped">
         <thead class="thead-inverse">
@@ -46,9 +53,20 @@ export default {
     Spinner
   },
   data() {
-    return {};
+    return {
+      // totalOwed: null
+    };
   },
   computed: {
+    totalOwed() {
+      if (this.clients && !this.loading) {
+        // console.log(this.clients);
+        this.clients.reduce((total, client) => {
+          return total + parseFloat(client.balance.toString());
+        }, 0);
+      }
+      return null;
+    },
     ...mapState(["clients", "user", "loading"])
   },
   methods: {
@@ -56,6 +74,7 @@ export default {
   },
   mounted() {
     this.getClients();
+    // console.log(this.clients);
   }
 };
 </script>
