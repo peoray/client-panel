@@ -32,36 +32,19 @@
 </template>
 
 <script>
+import { mapActions, mapState } from "vuex";
 export default {
   data() {
-    return {
-      clients: [
-        {
-          id: "3e323",
-          firstName: "Emmanuel",
-          lastName: "Raymond",
-          email: "emma@gmail.com",
-          phone: "555-55-55",
-          balance: "50"
-        },
-        {
-          id: "djjw",
-          firstName: "kachi",
-          lastName: "Jane",
-          email: "kachi@gmail.com",
-          phone: "123-56-99",
-          balance: "10"
-        },
-        {
-          id: "sjjs",
-          firstName: "Tony",
-          lastName: "Okpe",
-          email: "tony@gmail.com",
-          phone: "49-332-424",
-          balance: "90.99"
-        }
-      ]
-    };
+    return {};
+  },
+  computed: {
+    ...mapState(["clients", "user", "loading"])
+  },
+  methods: {
+    ...mapActions(["getClients"])
+  },
+  mounted() {
+    this.getClients();
   }
 };
 </script>
