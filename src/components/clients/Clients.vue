@@ -55,11 +55,11 @@ export default {
   data() {
     return {};
   },
-  watch: {
-    clients() {
-      alert("it has changed");
-    }
-  },
+  // watch: {
+  //   clients() {
+  //     alert("it has changed");
+  //   }
+  // },
   computed: {
     ...mapState(["clients", "user", "loading"]),
     totalOwed() {
