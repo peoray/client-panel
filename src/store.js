@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import router from "./router";
 import { vuexfireMutations, firestoreAction } from "vuexfire";
 import { db } from "./config/firebase";
 
@@ -41,6 +42,24 @@ export const store = new Vuex.Store({
           alert(error);
         }
       );
+    },
+    createClient({ commit }, payload) {    
+      db.collection("clients")
+        .add({
+          firstName: payload.firstName,
+          lastName: payload.lastName,
+          email: payload.email,
+          phone: payload.phone,
+          balance: payload.balance ? payload.balance : 0
+        })
+        .then(function(docRef) {
+          // console.log(docRef.firestore);
+          commit("SET_LOADING", false)
+        })
+        .catch(function(error) {
+          console.error("Error adding document: ", error);
+        });
+      router.push("/");
     }
   }
 });

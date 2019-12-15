@@ -27,7 +27,7 @@
           <tr v-for="client in clients" :key="client.id">
             <td>{{ client.firstName }} {{ client.lastName }}</td>
             <td>{{ client.email }}</td>
-            <td>{{ parseFloat(client.balance).toFixed(2) }}</td>
+            <td>${{ parseFloat(client.balance).toFixed(2) }}</td>
             <td>
               <router-link
                 :to="`/client/${client.id}`"
@@ -55,11 +55,6 @@ export default {
   data() {
     return {};
   },
-  // watch: {
-  //   clients() {
-  //     alert("it has changed");
-  //   }
-  // },
   computed: {
     ...mapState(["clients", "user", "loading"]),
     totalOwed() {

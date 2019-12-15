@@ -13,6 +13,15 @@ export default new Router({
       name: "dashboard",
       component: Dashboard
     },
+    {
+      path: "/client/add",
+      name: "add-client",
+      // route level code-splitting
+      // this generates a separate chunk (about.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () =>
+        import(/* webpackChunkName: "about" */ "./views/AddClient.vue")
+    }
     // {
     //   path: "/about",
     //   name: "about",
