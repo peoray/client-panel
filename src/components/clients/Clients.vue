@@ -1,6 +1,6 @@
 <template>
   <div>
-    <template v-if="!loading">
+    <template v-if="!loading && clients">
       <div class="row">
         <div class="col-md-6">
           <h2><i class="fas fa-users"></i> Clients</h2>

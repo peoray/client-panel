@@ -9,12 +9,16 @@ Vue.use(Vuex);
 export const store = new Vuex.Store({
   state: {
     clients: [],
+    client: null,
     loading: true,
     user: null
   },
   mutations: {
     SET_CLIENTS(state, payload) {
       state.clients = payload;
+    },
+    SET_CLIENT(state, payload) {
+      state.client = payload;
     },
     SET_LOADING(state, payload) {
       state.loading = payload;
@@ -43,7 +47,7 @@ export const store = new Vuex.Store({
         }
       );
     },
-    createClient({ commit }, payload) {    
+    createClient({ commit }, payload) {
       db.collection("clients")
         .add({
           firstName: payload.firstName,
@@ -54,12 +58,32 @@ export const store = new Vuex.Store({
         })
         .then(function(docRef) {
           // console.log(docRef.firestore);
-          commit("SET_LOADING", false)
+          commit("SET_LOADING", false);
         })
         .catch(function(error) {
           console.error("Error adding document: ", error);
         });
       router.push("/");
+    },
+    getSingleClient({commit}) {
+      db.collection("clients")
+        .doc(router.currentRoute.params.id)
+        .get()
+        .then(function(doc) {
+          if (doc.exists) {
+            // console.log("Document data:", doc.data());
+            const data = doc.data();
+            data.id = doc.id;
+            commit("SET_CLIENT", data);
+            commit("SET_LOADING", false);
+          } else {
+            // doc.data() will be undefined in this case
+            console.log("No such document!");
+          }
+        })
+        .catch(function(error) {
+          console.log("Error getting document:", error);
+        });
     }
   }
 });
