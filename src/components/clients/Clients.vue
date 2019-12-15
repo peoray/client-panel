@@ -7,10 +7,10 @@
         </div>
         <div class="col-md-6">
           <h5 class="text-right text-secondary">
-            Total owed
-            <span class="text-primary">{{
-              parseFloat(totalOwed).toFixed(2)
-            }}</span>
+            Total owed:
+            <span class="text-primary"
+              >${{ parseFloat(totalOwed).toFixed(2) }}</span
+            >
           </h5>
         </div>
       </div>
@@ -53,26 +53,28 @@ export default {
     Spinner
   },
   data() {
-    return {
-      // totalOwed: null
-    };
+    return {};
+  },
+  watch: {
+    clients() {
+      alert("it has changed");
+    }
   },
   computed: {
+    ...mapState(["clients", "user", "loading"]),
     totalOwed() {
       if (this.clients && !this.loading) {
-        // console.log(this.clients);
-        this.clients.reduce((total, client) => {
-          return total + parseFloat(client.balance.toString());
+        return this.clients.reduce((total, client) => {
+          return (total += parseFloat(client.balance.toString()));
         }, 0);
       }
       return null;
-    },
-    ...mapState(["clients", "user", "loading"])
+    }
   },
   methods: {
     ...mapActions(["getClients"])
   },
-  mounted() {
+  created() {
     this.getClients();
     // console.log(this.clients);
   }
