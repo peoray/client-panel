@@ -42,7 +42,7 @@
                   >${{ parseFloat(client.balance).toFixed(2) }}</span
                 >
                 <small>
-                  <a href="#" @click="showBalanceUpdate = !showBalanceUpdate">
+                  <a href="#" @click="toggleShowBalance">
                     <i class="fas fa-pencil-alt"></i>
                   </a>
                 </small>
@@ -53,10 +53,12 @@
               >
                 <div class="input-group">
                   <input
-                    type="text"
+                    type="number"
                     class="form-control"
+                    ref="balance"
                     v-model="balanceUpdateAmount"
                     placeholder="Add New Balance"
+                    required
                   />
                   <div class="input-group-append">
                     <input
@@ -86,6 +88,7 @@
 <script>
 import Spinner from "../layout/Spinner";
 import { mapActions, mapState } from "vuex";
+import Vue from "vue";
 export default {
   components: {
     Spinner
@@ -101,10 +104,23 @@ export default {
   },
   methods: {
     ...mapActions(["getSingleClient", "updateBalance", "deleteClient"]),
+    focusInput() {
+      this.$refs.balance.focus();
+    },
+    toggleShowBalance() {
+      this.showBalanceUpdate = !this.showBalanceUpdate;
+      var vm = this;
+      if (this.showBalanceUpdate) {
+        Vue.nextTick(function() {
+          vm.$refs.balance.focus();
+        });
+      }
+    },
     updateBalanceAmount() {
-      this.updateBalance(this.balanceUpdateAmount).then(
-        (this.showBalanceUpdate = false)
-      );
+      this.updateBalance(this.balanceUpdateAmount).then(() => {
+        this.balanceUpdateAmount = "";
+        this.showBalanceUpdate = false;
+      });
     },
     handleDeleteClient() {
       if (confirm("Are you sure?")) {
