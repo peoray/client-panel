@@ -65,25 +65,31 @@ export const store = new Vuex.Store({
         });
       router.push("/");
     },
-    getSingleClient({commit}) {
+    getSingleClient({ commit }) {
       db.collection("clients")
         .doc(router.currentRoute.params.id)
-        .get()
-        .then(function(doc) {
-          if (doc.exists) {
-            // console.log("Document data:", doc.data());
-            const data = doc.data();
-            data.id = doc.id;
-            commit("SET_CLIENT", data);
-            commit("SET_LOADING", false);
-          } else {
-            // doc.data() will be undefined in this case
-            console.log("No such document!");
+        .onSnapshot(
+          doc => {
+            if (doc.exists) {
+              // console.log("Document data:", doc.data());
+              const data = doc.data();
+              data.id = doc.id;
+              commit("SET_CLIENT", data);
+              commit("SET_LOADING", false);
+            } else {
+              // doc.data() will be undefined in this case
+              console.log("No such document!");
+            }
+          },
+          error => {
+            console.log("Error getting document:", error);
           }
-        })
-        .catch(function(error) {
-          console.log("Error getting document:", error);
-        });
+        );
+    },
+    updateBalance({ commit }, payload) {
+      db.collection("clients")
+        .doc(router.currentRoute.params.id)
+        .update({ balance: payload });
     }
   }
 });

@@ -39,8 +39,32 @@
                   }"
                   >${{ parseFloat(client.balance).toFixed(2) }}</span
                 >
+                <small>
+                  <a href="#" @click="showBalanceUpdate = !showBalanceUpdate">
+                    <i class="fas fa-pencil-alt"></i>
+                  </a>
+                </small>
               </h3>
-              <!-- balnce form -->
+              <form
+                v-if="showBalanceUpdate"
+                @submit.prevent="updateBalanceAmount"
+              >
+                <div class="input-group">
+                  <input
+                    type="text"
+                    class="form-control"
+                    v-model="balanceUpdateAmount"
+                    placeholder="Add New Balance"
+                  />
+                  <div class="input-group-append">
+                    <input
+                      type="submit"
+                      class="btn btn-outline-dark"
+                      value="Update"
+                    />
+                  </div>
+                </div>
+              </form>
             </div>
           </div>
           <hr />
@@ -64,11 +88,22 @@ export default {
   components: {
     Spinner
   },
+  data() {
+    return {
+      showBalanceUpdate: false,
+      balanceUpdateAmount: ""
+    };
+  },
   computed: {
     ...mapState(["client", "loading"])
   },
   methods: {
-    ...mapActions(["getSingleClient"])
+    ...mapActions(["getSingleClient", "updateBalance"]),
+    updateBalanceAmount() {
+      this.updateBalance(this.balanceUpdateAmount).then(
+        (this.showBalanceUpdate = false)
+      );
+    }
   },
   mounted() {
     this.getSingleClient();
