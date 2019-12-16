@@ -91,11 +91,37 @@ export const store = new Vuex.Store({
         .doc(router.currentRoute.params.id)
         .update({ balance: payload });
     },
+    updateClient({ commit }, payload) {
+      db.collection("clients")
+        .doc(router.currentRoute.params.id)
+        .update(payload)
+        .then(function(data) {
+          console.log("Document successfully updated!");
+          console.log(data);
+          // commit("SET_CLIENT", data);
+          commit("SET_LOADING", false);
+        })
+        .catch(function(error) {
+          // The document probably doesn't exist.
+          console.error("Error updating document: ", error);
+        });
+      router.go(-1)
+    },
     deleteClient() {
       db.collection("clients")
         .doc(router.currentRoute.params.id)
-        .delete();
-      router.push("/");
+        .delete()
+        .then(function(data) {
+          console.log("Document successfully updated!");
+          console.log(data);
+          // commit("SET_CLIENT", data);
+          commit("SET_LOADING", false);
+        })
+        .catch(function(error) {
+          // The document probably doesn't exist.
+          console.error("Error updating document: ", error);
+        });
+        router.push("/");
     }
   }
 });

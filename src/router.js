@@ -19,11 +19,18 @@ export default new Router({
       component: () =>
         import(/* webpackChunkName: "about" */ "./views/AddClient.vue")
     },
+    
     {
       path: "/client/:id",
       name: "client-details",
       component: () =>
         import(/* webpackChunkName: "about" */ "./views/ClientDetails.vue")
+    },
+    {
+      path: "/client/edit/:id",
+      name: "edit-client",
+      component: () =>
+        import(/* webpackChunkName: "about" */ "./views/EditClient.vue")
     }
     // {
     //   path: "/about",

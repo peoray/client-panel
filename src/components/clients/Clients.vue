@@ -58,6 +58,7 @@ export default {
   computed: {
     ...mapState(["clients", "user", "loading"]),
     totalOwed() {
+      // use this as getter in vuex store
       if (this.clients && !this.loading) {
         return this.clients.reduce((total, client) => {
           return (total += parseFloat(client.balance.toString()));
@@ -71,7 +72,6 @@ export default {
   },
   created() {
     this.getClients();
-    // console.log(this.clients);
   }
 };
 </script>

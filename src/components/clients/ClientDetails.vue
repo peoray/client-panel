@@ -37,7 +37,7 @@
                 <span
                   :class="{
                     'text-danger': client.balance > 0,
-                    'text-success': client.balance === 0
+                    'text-success': client.balance === '0'
                   }"
                   >${{ parseFloat(client.balance).toFixed(2) }}</span
                 >
