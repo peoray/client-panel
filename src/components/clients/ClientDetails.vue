@@ -12,7 +12,9 @@
             <router-link :to="`/client/edit/${client.id}`" class="btn btn-dark"
               >Edit</router-link
             >
-            <button class="btn btn-danger">Delete</button>
+            <button class="btn btn-danger" @click="handleDeleteClient">
+              Delete
+            </button>
           </div>
         </div>
       </div>
@@ -98,11 +100,17 @@ export default {
     ...mapState(["client", "loading"])
   },
   methods: {
-    ...mapActions(["getSingleClient", "updateBalance"]),
+    ...mapActions(["getSingleClient", "updateBalance", "deleteClient"]),
     updateBalanceAmount() {
       this.updateBalance(this.balanceUpdateAmount).then(
         (this.showBalanceUpdate = false)
       );
+    },
+    handleDeleteClient() {
+      if (confirm("Are you sure?")) {
+        return this.deleteClient();
+      }
+      return false;
     }
   },
   mounted() {

@@ -90,6 +90,12 @@ export const store = new Vuex.Store({
       db.collection("clients")
         .doc(router.currentRoute.params.id)
         .update({ balance: payload });
+    },
+    deleteClient() {
+      db.collection("clients")
+        .doc(router.currentRoute.params.id)
+        .delete();
+      router.push("/");
     }
   }
 });
