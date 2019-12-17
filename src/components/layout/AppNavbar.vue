@@ -26,10 +26,14 @@
             <router-link to="/" class="nav-link" tag="a">Settings</router-link>
           </li>
           <li class="nav-item">
-            <router-link to="/" class="nav-link" tag="a">Register</router-link>
+            <router-link to="/register" class="nav-link" tag="a"
+              >Register</router-link
+            >
           </li>
           <li class="nav-item">
-            <router-link to="/" class="nav-link" tag="a">Login</router-link>
+            <router-link to="/login" class="nav-link" tag="a"
+              >Login</router-link
+            >
           </li>
           <li class="nav-item">
             <router-link to="/" class="nav-link" tag="a">Logout</router-link>

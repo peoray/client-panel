@@ -14,6 +14,12 @@ export default new Router({
       component: Dashboard
     },
     {
+      path: "/login",
+      name: "login",
+      component: () =>
+        import(/* webpackChunkName: "about" */ "./views/Login.vue")
+    },
+    {
       path: "/client/add",
       name: "add-client",
       component: () =>

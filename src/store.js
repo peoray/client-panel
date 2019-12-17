@@ -2,7 +2,7 @@ import Vue from "vue";
 import Vuex from "vuex";
 import router from "./router";
 import { vuexfireMutations, firestoreAction } from "vuexfire";
-import { db } from "./config/firebase";
+import { db, user } from "./config/firebase";
 
 Vue.use(Vuex);
 
@@ -22,6 +22,9 @@ export const store = new Vuex.Store({
     },
     SET_LOADING(state, payload) {
       state.loading = payload;
+    },
+    SET_USER(state, payload) {
+      state.user = payload;
     },
     ...vuexfireMutations
   },
@@ -105,7 +108,7 @@ export const store = new Vuex.Store({
           // The document probably doesn't exist.
           console.error("Error updating document: ", error);
         });
-      router.go(-1)
+      router.go(-1);
     },
     deleteClient() {
       db.collection("clients")
@@ -121,7 +124,26 @@ export const store = new Vuex.Store({
           // The document probably doesn't exist.
           console.error("Error updating document: ", error);
         });
-        router.push("/");
+      router.push("/");
+    },
+    loginUser({ commit }, payload) {
+      user
+        .signInWithEmailAndPassword(payload.email, payload.password)
+        .then(user => {
+          // commit("SET_LOADING", false);
+          // const newUser = {
+          //   id: user.uid,
+          //   registeredMeetups: []
+          // };
+          console.log(user);
+          commit("SET_USER", user);
+          router.push("/");
+        })
+        .catch(error => {
+          commit("setLoading", false);
+          commit("setError", error);
+          console.log(error.message);
+        });
     }
   }
 });
