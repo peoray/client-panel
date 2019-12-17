@@ -46,6 +46,7 @@
 
 <script>
 import { mapActions, mapState } from "vuex";
+import { user } from "../../config/firebase";
 export default {
   data() {
     return {
@@ -56,8 +57,6 @@ export default {
   methods: {
     ...mapActions(["loginUser"]),
     handleSubmit() {
-      console.log(this.email);
-      console.log(this.password);
       this.loginUser({ email: this.email, password: this.password });
     }
   }

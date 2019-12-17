@@ -11,7 +11,8 @@ export const store = new Vuex.Store({
     clients: [],
     client: null,
     loading: true,
-    user: null
+    user: null,
+    isAuthenticated: false
   },
   mutations: {
     SET_CLIENTS(state, payload) {
@@ -25,6 +26,9 @@ export const store = new Vuex.Store({
     },
     SET_USER(state, payload) {
       state.user = payload;
+    },
+    SET_ISAUTHENTICATED(state, payload) {
+      state.isAuthenticated = payload;
     },
     ...vuexfireMutations
   },
@@ -130,20 +134,31 @@ export const store = new Vuex.Store({
       user
         .signInWithEmailAndPassword(payload.email, payload.password)
         .then(user => {
-          // commit("SET_LOADING", false);
-          // const newUser = {
-          //   id: user.uid,
-          //   registeredMeetups: []
-          // };
-          console.log(user);
           commit("SET_USER", user);
           router.push("/");
+          // router.go({ path: router.path })
         })
         .catch(error => {
-          commit("setLoading", false);
-          commit("setError", error);
+          // commit("setLoading", false);
+          // commit("setError", error);
+          alert(error.message)
           console.log(error.message);
         });
+    },
+    isAuthenticatedState({ commit }) {
+      user.onAuthStateChanged(function(user) {
+        if (user) {
+          commit("SET_USER", user);
+          commit("SET_ISAUTHENTICATED", true);
+        } else {
+          // User is signed out.
+          commit("SET_ISAUTHENTICATED", false);
+        }
+      });
+    },
+    logoutUser() {
+      user.signOut();
+      router.push("/login");
     }
   }
 });
