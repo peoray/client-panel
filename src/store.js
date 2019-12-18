@@ -12,7 +12,11 @@ export const store = new Vuex.Store({
     client: null,
     loading: true,
     user: null,
-    isAuthenticated: false
+    isAuthenticated: false,
+    notification: {
+      message: "",
+      type: ""
+    }
   },
   mutations: {
     SET_CLIENTS(state, payload) {
@@ -26,6 +30,12 @@ export const store = new Vuex.Store({
     },
     SET_USER(state, payload) {
       state.user = payload;
+    },
+    SET_NOTIFICATION_TYPE(state, payload) {
+      state.notification.type = payload;
+    },
+    SET_NOTIFICATION_MESSAGE(state, payload) {
+      state.notification.message = payload;
     },
     SET_ISAUTHENTICATED(state, payload) {
       state.isAuthenticated = payload;
@@ -140,9 +150,10 @@ export const store = new Vuex.Store({
         })
         .catch(error => {
           // commit("setLoading", false);
-          // commit("setError", error);
-          alert(error.message)
-          console.log(error.message);
+          commit("SET_NOTIFICATION_TYPE", "error");
+          commit("SET_NOTIFICATION_MESSAGE", error.message);
+          // alert(error.message);
+          // console.log(error.message);
         });
     },
     isAuthenticatedState({ commit }) {

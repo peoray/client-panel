@@ -4,6 +4,7 @@
       <div class="col-md-6 mx-auto">
         <div class="card">
           <div class="card-body">
+            <Alert />
             <h1 class="text-center pb-4 pt-3">
               <span class="text-primary"><i class="fas fa-lock"></i></span>
               Login
@@ -45,9 +46,13 @@
 </template>
 
 <script>
+import Alert from "../layout/Alert";
 import { mapActions, mapState } from "vuex";
 import { user } from "../../config/firebase";
 export default {
+  components: {
+    Alert
+  },
   data() {
     return {
       email: "",
