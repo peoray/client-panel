@@ -21,12 +21,10 @@
           </ul>
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
-              <router-link to="/" class="nav-link" tag="a">{{
-                user.email
-              }}</router-link>
+              <a href="#" class="nav-link">{{ user.email }}</a>
             </li>
             <li class="nav-item">
-              <router-link to="/" class="nav-link" tag="a"
+              <router-link to="/settings" class="nav-link" tag="a"
                 >Settings</router-link
               >
             </li>

@@ -2,7 +2,7 @@ import Vue from "vue";
 import Router from "vue-router";
 import Dashboard from "./views/Dashboard.vue";
 import { user } from "./config/firebase";
-import store from "./store";
+// import store from "./store";
 
 Vue.use(Router);
 
@@ -46,7 +46,15 @@ const router = new Router({
         requiresAuth: true
       }
     },
-
+    {
+      path: "/settings",
+      name: "settings",
+      component: () =>
+        import(/* webpackChunkName: "about" */ "./views/Settings.vue"),
+      meta: {
+        requiresAuth: true
+      }
+    },
     {
       path: "/client/:id",
       name: "client-details",

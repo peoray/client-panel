@@ -16,7 +16,10 @@ export const store = new Vuex.Store({
     notification: {
       message: "",
       type: ""
-    }
+    },
+    disableBalanceOnAdd: true,
+    disableBalanceOnEdit: false,
+    allowRegistration: true
   },
   mutations: {
     SET_CLIENTS(state, payload) {
@@ -39,6 +42,15 @@ export const store = new Vuex.Store({
     },
     SET_ISAUTHENTICATED(state, payload) {
       state.isAuthenticated = payload;
+    },
+    SET_DISABLE_BALANCE_ADD(state, payload) {
+      state.disableBalanceOnAdd = payload;
+    },
+    SET_DISABLE_BALANCE_EDIT(state, payload) {
+      state.disableBalanceOnEdit = payload;
+    },
+    SET_ALLOW_REGISTRATION(state, payload) {
+      state.allowRegistration = payload;
     },
     ...vuexfireMutations
   },
@@ -170,6 +182,15 @@ export const store = new Vuex.Store({
     logoutUser() {
       user.signOut();
       router.push("/login");
+    },
+    handleAllowRegistration({ state }) {
+      state.allowRegistration = !state.allowRegistration;
+    },
+    handleDisableBalanceOnAdd({ state }) {
+      state.disableBalanceOnAdd = !state.disableBalanceOnAdd;
+    },
+    handleDisableBalanceOnEdit({ state }) {
+      state.disableBalanceOnEdit = !state.disableBalanceOnEdit;
     }
   }
 });
