@@ -57,10 +57,11 @@
           <div class="form-group">
             <label for="balance">Balance</label>
             <input
-              type="text"
+              type="number"
               class="form-control"
               name="balance"
               v-model="client.balance"
+              :disabled="disableBalanceOnAdd"
             />
           </div>
           <input
@@ -75,7 +76,7 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
+import { mapActions, mapState } from "vuex";
 export default {
   data() {
     return {
@@ -86,7 +87,11 @@ export default {
         phone: "",
         balance: ""
       }
+      // disabledBalance: !this.disabledBalanceOnAdd
     };
+  },
+  computed: {
+    ...mapState(["disableBalanceOnAdd"])
   },
   methods: {
     ...mapActions(["createClient"]),

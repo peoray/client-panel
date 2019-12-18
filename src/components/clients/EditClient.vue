@@ -58,10 +58,11 @@
             <div class="form-group">
               <label for="balance">Balance</label>
               <input
-                type="text"
+                type="number"
                 class="form-control"
                 name="balance"
                 v-model="clientData.balance"
+                :disabled="disableBalanceOnEdit"
               />
             </div>
             <input
@@ -112,7 +113,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(["client", "loading"])
+    ...mapState(["client", "loading", "disableBalanceOnEdit"])
   },
   methods: {
     ...mapActions(["getSingleClient", "updateClient"]),

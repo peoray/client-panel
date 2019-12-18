@@ -33,7 +33,7 @@
             </li>
           </ul>
         </template>
-        <template v-else>
+        <template v-if="!isAuthenticated && allowRegistration">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
               <router-link to="/register" class="nav-link" tag="a"
@@ -70,7 +70,7 @@ export default {
     };
   },
   computed: {
-    ...mapState(["isAuthenticated", "user"])
+    ...mapState(["isAuthenticated", "user", "allowRegistration"])
   },
   methods: {
     ...mapActions(["logoutUser"])
