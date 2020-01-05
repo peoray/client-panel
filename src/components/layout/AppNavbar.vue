@@ -23,17 +23,17 @@
             <li class="nav-item">
               <a href="#" class="nav-link">{{ user.email }}</a>
             </li>
-            <li class="nav-item">
+            <!-- <li class="nav-item">
               <router-link to="/settings" class="nav-link" tag="a"
                 >Settings</router-link
               >
-            </li>
+            </li> -->
             <li class="nav-item" @click.prevent="logoutUser">
               <router-link to="#!" class="nav-link" tag="a">Logout</router-link>
             </li>
           </ul>
         </template>
-        <template v-if="!isAuthenticated && allowRegistration">
+        <template v-if="!isAuthenticated">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item">
               <router-link to="/register" class="nav-link" tag="a"
@@ -47,33 +47,24 @@
             </li>
           </ul>
         </template>
-
-        <!-- <SignedInLinks /> -->
-        <!-- <SignedOutLinks /> -->
       </div>
     </div>
   </nav>
 </template>
 
 <script>
-import SignedInLinks from "./SignedInLinks";
-import SignedOutLinks from "./SignedOutLinks";
-import { mapActions, mapState } from "vuex";
+import { mapActions, mapGetters } from 'vuex';
 export default {
-  components: {
-    SignedOutLinks,
-    SignedInLinks
-  },
   data() {
     return {
       // isAuthenticated: false
     };
   },
   computed: {
-    ...mapState(["isAuthenticated", "user", "allowRegistration"])
+    ...mapGetters(['isAuthenticated', 'user'])
   },
   methods: {
-    ...mapActions(["logoutUser"])
+    ...mapActions(['logoutUser'])
   }
 };
 </script>

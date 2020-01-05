@@ -61,7 +61,6 @@
               class="form-control"
               name="balance"
               v-model="client.balance"
-              :disabled="disableBalanceOnAdd"
             />
           </div>
           <input
@@ -76,25 +75,24 @@
 </template>
 
 <script>
-import { mapActions, mapState } from "vuex";
+import { mapActions, mapGetters } from 'vuex';
 export default {
   data() {
     return {
       client: {
-        firstName: "",
-        lastName: "",
-        email: "",
-        phone: "",
-        balance: ""
+        firstName: '',
+        lastName: '',
+        email: '',
+        phone: '',
+        balance: ''
       }
-      // disabledBalance: !this.disabledBalanceOnAdd
     };
   },
   computed: {
-    ...mapState(["disableBalanceOnAdd"])
+    ...mapGetters(['disableBalanceOnAdd'])
   },
   methods: {
-    ...mapActions(["createClient"]),
+    ...mapActions(['createClient']),
     handleSubmit() {
       this.createClient(this.client);
     }

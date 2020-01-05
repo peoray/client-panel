@@ -13,34 +13,16 @@
           <form>
             <div class="form-group">
               <label for="registration">Allow registration</label>
-              <input
-                type="checkbox"
-                name="registration"
-                :checked="!!allowRegistrationModel"
-                @change="handleAllowRegistrationFn"
-                v-model="allowRegistrationModel"
-              />
+              <input type="checkbox" name="registration" />
             </div>
             <div class="form-group">
               <label for="registration">Disable Balance on Add</label>
-              <input
-                type="checkbox"
-                name="registration"
-                :checked="!!disableBalanceOnAdd"
-                @change="handleDisableBalanceOnAddFn"
-                v-model="disableBalanceOnAddModel"
-              />
+              <input type="checkbox" name="registration" />
             </div>
             <div class="form-group">
               `
               <label for="registration">Disable Balance on Edit</label>
-              <input
-                type="checkbox"
-                name="registration"
-                :checked="!!disableBalanceOnEdit"
-                v-model="disableBalanceOnEditModel"
-                @change="handleDisableBalanceOnEditFn"
-              />
+              <input type="checkbox" name="registration" />
             </div>
           </form>
         </div>
@@ -50,37 +32,5 @@
 </template>
 
 <script>
-import { mapState, mapActions } from "vuex";
-export default {
-  data() {
-    return {
-      allowRegistrationModel: !this.allowRegistration,
-      disableBalanceOnAddModel: !this.disableBalanceonAdd,
-      disableBalanceOnEditModel: !!this.disableBalanceonEdit
-    };
-  },
-  computed: {
-    ...mapState([
-      "disableBalanceOnAdd",
-      "disableBalanceOnEdit",
-      "allowRegistration"
-    ])
-  },
-  methods: {
-    ...mapActions([
-      "handleAllowRegistration",
-      "handleDisableBalanceOnAdd",
-      "handleDisableBalanceOnEdit"
-    ]),
-    handleAllowRegistrationFn() {
-      this.handleAllowRegistration();
-    },
-    handleDisableBalanceOnAddFn() {
-      // this.handleDisableBalanceOnAdd();
-    },
-    handleDisableBalanceOnEditFn() {
-      this.handleDisableBalanceOnEdit();
-    }
-  }
-};
+export default {};
 </script>

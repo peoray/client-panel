@@ -46,21 +46,20 @@
 </template>
 
 <script>
-import Alert from "../layout/Alert";
-import { mapActions, mapState } from "vuex";
-import { user } from "../../config/firebase";
+import Alert from '../layout/Alert';
+import { mapActions } from 'vuex';
 export default {
   components: {
     Alert
   },
   data() {
     return {
-      email: "",
-      password: ""
+      email: '',
+      password: ''
     };
   },
   methods: {
-    ...mapActions(["loginUser"]),
+    ...mapActions(['loginUser']),
     handleSubmit() {
       this.loginUser({ email: this.email, password: this.password });
     }

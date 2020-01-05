@@ -8,14 +8,14 @@
 </template>
 
 <script>
-import { mapActions, mapState } from "vuex";
-import AppNavbar from "./components//layout/AppNavbar";
+import { mapActions } from 'vuex';
+import AppNavbar from './components/layout/AppNavbar';
 export default {
   components: {
     AppNavbar
   },
   methods: {
-    ...mapActions(["isAuthenticatedState"])
+    ...mapActions(['isAuthenticatedState'])
   },
   mounted() {
     this.isAuthenticatedState();
