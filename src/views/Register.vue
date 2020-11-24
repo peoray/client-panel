@@ -4,10 +4,10 @@
 
 <script>
 // @ is an alias to /src
-import Register from '@/components/auth/Register.vue';
+import Register from "@/components/auth/Register.vue";
 
 export default {
-  name: 'register',
+  name: "register",
   components: {
     Register
   }

@@ -1,13 +1,13 @@
-import { db, user } from '../../config/firebase';
-import router from '../../router';
+import { user } from "../../config/firebase";
+import router from "../../router";
 
 export default {
   state: {
     user: null,
     isAuthenticated: false,
     notification: {
-      message: '',
-      type: ''
+      message: "",
+      type: ""
     }
   },
 
@@ -36,40 +36,49 @@ export default {
       user
         .createUserWithEmailAndPassword(payload.email, payload.password)
         .then(user => {
-          commit('SET_USER', user);
-          router.push('/');
+          commit("SET_USER", user);
+          router.push("/");
         })
         .catch(error => {
-          commit('SET_NOTIFICATION_TYPE', 'error');
-          commit('SET_NOTIFICATION_MESSAGE', error.message);
+          commit("SET_NOTIFICATION_TYPE", "error");
+          commit("SET_NOTIFICATION_MESSAGE", error.message);
         });
     },
     loginUser({ commit }, payload) {
       user
         .signInWithEmailAndPassword(payload.email, payload.password)
         .then(user => {
-          commit('SET_USER', user);
-          router.push('/');
+          commit("SET_USER", user);
+          router.push("/");
         })
         .catch(error => {
-          commit('SET_NOTIFICATION_TYPE', 'error');
-          commit('SET_NOTIFICATION_MESSAGE', error.message);
+          commit("SET_NOTIFICATION_TYPE", "error");
+          commit("SET_NOTIFICATION_MESSAGE", error.message);
         });
     },
     isAuthenticatedState({ commit }) {
       user.onAuthStateChanged(function(user) {
         if (user) {
-          commit('SET_USER', user);
-          commit('SET_ISAUTHENTICATED', true);
+          commit("SET_USER", user);
+          commit("SET_ISAUTHENTICATED", true);
         } else {
           // User is signed out.
-          commit('SET_ISAUTHENTICATED', false);
+          commit("SET_ISAUTHENTICATED", false);
+          commit("SET_USER", null);
+          commit("SET_CLIENTS", [], { root: true });
         }
       });
     },
-    logoutUser() {
+    clearData({ commit }) {
+      commit("SET_USER", null);
+      commit("SET_ISAUTHENTICATED", false);
+    },
+    logoutUser({ commit, dispatch }) {
       user.signOut();
-      router.push('/login');
+      // console.log(user.currentUser.email);
+      // dispatch("clearData");
+      // commit("SET_CLIENTS", [], { root: true });
+      router.push("/login");
     }
   }
 };

@@ -86,9 +86,9 @@
 </template>
 
 <script>
-import Spinner from '../layout/Spinner';
-import { mapActions, mapGetters } from 'vuex';
-import Vue from 'vue';
+import Spinner from "../layout/Spinner";
+import { mapActions, mapGetters } from "vuex";
+import Vue from "vue";
 export default {
   components: {
     Spinner
@@ -96,14 +96,14 @@ export default {
   data() {
     return {
       showBalanceUpdate: false,
-      balanceUpdateAmount: ''
+      balanceUpdateAmount: ""
     };
   },
   computed: {
-    ...mapGetters(['client', 'loading'])
+    ...mapGetters(["client", "loading"])
   },
   methods: {
-    ...mapActions(['getSingleClient', 'updateBalance', 'deleteClient']),
+    ...mapActions(["getSingleClient", "updateBalance", "deleteClient"]),
     focusInput() {
       this.$refs.balance.focus();
     },
@@ -118,12 +118,12 @@ export default {
     },
     updateBalanceAmount() {
       this.updateBalance(this.balanceUpdateAmount).then(() => {
-        this.balanceUpdateAmount = '';
+        this.balanceUpdateAmount = "";
         this.showBalanceUpdate = false;
       });
     },
     handleDeleteClient() {
-      if (confirm('Are you sure?')) {
+      if (confirm("Are you sure?")) {
         return this.deleteClient();
       }
       return false;

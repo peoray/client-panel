@@ -13,10 +13,10 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex';
+import { mapGetters } from "vuex";
 export default {
   computed: {
-    ...mapGetters(['notification'])
+    ...mapGetters(["notification"])
   }
 };
 </script>

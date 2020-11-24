@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="app">
     <app-navbar></app-navbar>
     <div class="container">
       <router-view />
@@ -8,14 +8,14 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex';
-import AppNavbar from './components/layout/AppNavbar';
+import { mapActions } from "vuex";
+import AppNavbar from "./components/layout/AppNavbar";
 export default {
   components: {
     AppNavbar
   },
   methods: {
-    ...mapActions(['isAuthenticatedState'])
+    ...mapActions(["isAuthenticatedState"])
   },
   mounted() {
     this.isAuthenticatedState();

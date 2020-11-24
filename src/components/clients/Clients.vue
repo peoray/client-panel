@@ -46,8 +46,8 @@
 </template>
 
 <script>
-import Spinner from '../layout/Spinner';
-import { mapActions, mapGetters } from 'vuex';
+import Spinner from "../layout/Spinner";
+import { mapActions, mapGetters } from "vuex";
 export default {
   components: {
     Spinner
@@ -56,7 +56,7 @@ export default {
     return {};
   },
   computed: {
-    ...mapGetters(['clients', 'user', 'loading']),
+    ...mapGetters(["clients", "user", "loading"]),
     totalOwed() {
       // use this as getter in vuex store
       if (this.clients && !this.loading) {
@@ -68,9 +68,9 @@ export default {
     }
   },
   methods: {
-    ...mapActions(['getClients'])
+    ...mapActions(["getClients"])
   },
-  created() {
+  mounted() {
     this.getClients();
   }
 };

@@ -46,20 +46,20 @@
 </template>
 
 <script>
-import Alert from '../layout/Alert';
-import { mapActions } from 'vuex';
+import Alert from "../layout/Alert";
+import { mapActions } from "vuex";
 export default {
   components: {
     Alert
   },
   data() {
     return {
-      email: '',
-      password: ''
+      email: "",
+      password: ""
     };
   },
   methods: {
-    ...mapActions(['registerUser']),
+    ...mapActions(["registerUser"]),
     handleSubmit() {
       this.registerUser({ email: this.email, password: this.password });
     }

@@ -29,7 +29,7 @@
               >
             </li> -->
             <li class="nav-item" @click.prevent="logoutUser">
-              <router-link to="#!" class="nav-link" tag="a">Logout</router-link>
+              <router-link to="#" class="nav-link" tag="a">Logout</router-link>
             </li>
           </ul>
         </template>
@@ -53,7 +53,7 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex';
+import { mapActions, mapGetters } from "vuex";
 export default {
   data() {
     return {
@@ -61,10 +61,10 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(['isAuthenticated', 'user'])
+    ...mapGetters(["isAuthenticated", "user"])
   },
   methods: {
-    ...mapActions(['logoutUser'])
+    ...mapActions(["logoutUser"])
   }
 };
 </script>

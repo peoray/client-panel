@@ -80,8 +80,8 @@
 </template>
 
 <script>
-import Spinner from '../layout/Spinner';
-import { mapActions, mapGetters } from 'vuex';
+import Spinner from "../layout/Spinner";
+import { mapActions, mapGetters } from "vuex";
 
 export default {
   components: {
@@ -99,7 +99,7 @@ export default {
       // email: client && client.email,
       // phone: client && client.phone,
       // balance: client && client.balance,
-      clientData: this.client ? '' : ''
+      clientData: this.client ? "" : ""
       // clientData: this.$store.state.client ? this.$store.state.client : ""
       // this.$store.state.client,
       // clientData: {
@@ -112,25 +112,25 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(['client', 'loading'])
+    ...mapGetters(["client", "loading"])
   },
   methods: {
-    ...mapActions(['getSingleClient', 'updateClient']),
+    ...mapActions(["getSingleClient", "updateClient"]),
     populateClientData() {
       if (this.client && !this.loading) {
         // this.clientData = this.client;
-        this.firstName = this.client.firstName || '';
-        this.lastName = this.client.lastName || '';
-        this.email = this.client.email || '';
-        this.phone = this.client.phone || '';
-        this.balance = this.client.balance || '';
+        this.firstName = this.client.firstName || "";
+        this.lastName = this.client.lastName || "";
+        this.email = this.client.email || "";
+        this.phone = this.client.phone || "";
+        this.balance = this.client.balance || "";
       } else {
         return null;
       }
     },
     handleSubmit() {
       this.clientData.balance =
-        this.clientData.balance === '' ? 0 : this.clientData.balance;
+        this.clientData.balance === "" ? 0 : this.clientData.balance;
       this.updateClient(this.clientData);
     }
   },

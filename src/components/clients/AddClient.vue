@@ -75,24 +75,24 @@
 </template>
 
 <script>
-import { mapActions, mapGetters } from 'vuex';
+import { mapActions, mapGetters } from "vuex";
 export default {
   data() {
     return {
       client: {
-        firstName: '',
-        lastName: '',
-        email: '',
-        phone: '',
-        balance: ''
+        firstName: "",
+        lastName: "",
+        email: "",
+        phone: "",
+        balance: ""
       }
     };
   },
   computed: {
-    ...mapGetters(['disableBalanceOnAdd'])
+    ...mapGetters(["disableBalanceOnAdd"])
   },
   methods: {
-    ...mapActions(['createClient']),
+    ...mapActions(["createClient"]),
     handleSubmit() {
       this.createClient(this.client);
     }
