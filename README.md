@@ -1,4 +1,4 @@
-# contact-manager
+# Client Panel
 
 ## Project setup
 ```
